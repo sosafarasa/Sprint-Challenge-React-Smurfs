@@ -5,6 +5,7 @@ import { Route, } from 'react-router-dom';
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import SmurfNav from './components/SmufNav';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends Component {
   componentDidMount(){
     axios.get('http://localhost:3333/smurfs')
     .then(res => {
-      this.setState({ smurfs: Response.data })
+      this.setState({ smurfs: res.data })
     })
     .catch( err => console.log(err) );
   }
@@ -29,11 +30,25 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
-        <SmurfForm />
-        <Smurfs smurfs={this.state.smurfs} />
+      <div className="app">
+        <SmurfNav />
+        <Route exact path="/" render={props => (
+          <Smurfs smurfs={this.state.smurfs} {...props} />
+        )} />
+        <Route path="/smurf-form" render={props => (
+          <SmurfForm onSubmit={this.update} {...props} />
+        )} />
+        <Route path="/smurf/:id" render={props => (
+          <Smurfs smurfs={this.state.smurfs} {...props} />
+        )} />
       </div>
     );
+  }
+
+
+
+  update = smurfData => {
+    this.setState ({ smurfs: smurfData });
   }
 }
 

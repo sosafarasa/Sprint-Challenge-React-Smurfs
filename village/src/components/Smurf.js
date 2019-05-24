@@ -7,7 +7,6 @@ const Smurf = props => {
       <h3>{props.name}</h3>
       <strong>{props.height} tall</strong>
       <p>{props.age} smurf years old</p>
-    
     </li>
   );
 };
@@ -18,5 +17,5 @@ Smurf.defaultProps = {
   age: ''
 };
 
-export default Smurf;
+export default withRouter(Smurf);
 
