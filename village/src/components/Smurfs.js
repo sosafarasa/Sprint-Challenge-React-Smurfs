@@ -10,9 +10,9 @@ class Smurfs extends Component {
         <ul>
         {this.props.smurfs.filter(smurf => {
             let matchId = this.props.match.params.id;
-            if (matchId === undefined) { return true;}
+            if (matchId === undefined) { return true; }
             matchId = Number(matchId);
-            if (matchId === smurf.id) { return true;}
+            if (matchId === smurf.id) { return true; }
           }).map(smurf => {
             return (
               <Smurf
@@ -31,7 +31,7 @@ class Smurfs extends Component {
 }
 
 Smurf.defaultProps = {
- smurfs: [],
+ smurfs: []
 };
 
 export default Smurfs;
